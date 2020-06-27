@@ -1,0 +1,17 @@
+{
+  "name": "practice-bfu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.j",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "micro": "^9.3.4",
+    "nodemon": "^2.0.4"
+  }
+}

@@ -56,8 +56,8 @@ exports.sixthQuestion = () => {
 
 exports.answer = () => {
   return {
-    text: `Все`,
-    tts: `Все`,
+    text: `Всё`,
+    tts: `Всё`,
     end_session: false
   };
 };

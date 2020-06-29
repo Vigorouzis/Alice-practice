@@ -2,14 +2,12 @@ const micro = require('micro');
 const replies = require('./replies');
 
 
-let question;
-
 const server = micro(async (req, res) => {
   if (req.method !== 'POST') {
     return 'Server is running';
   }
 
-  const { request, session } = await micro.json(req);
+  const {request, session} = await micro.json(req);
   const response = session.new
     ? replies.welcome()
     : checkAnswer(request.command);
@@ -21,13 +19,16 @@ const server = micro(async (req, res) => {
 });
 
 function checkAnswer(command) {
-  if (/женский/i.test(command)) {
-    question = generateQuestion();
-    return replies.firstQuestion(question);
+  if (/(?:\b|-)([1-9]{1,2}[0]?|100)\b/g.test(command) && /женский/i.test(command)) {
+    return replies.firstQuestion();
   }
-  return replies.answer();
+  if (/(?:\b|-)([1-9]{1,2}[0]?|100)\b/g.test(command) || /да/i.test(command)) {
+    return replies.secondQuestion();
+  }
+  if (/#^[0-9]+$#/g.test(command)) {
+    return replies.thirdQuestion();
+  }
 }
-
 
 const PORT = 3000;
 server.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}, tunnel: http://localhost:4040`));

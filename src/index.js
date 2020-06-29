@@ -25,9 +25,25 @@ function checkAnswer(command) {
   if (/(?:\b|-)([1-9]{1,2}[0]?|100)\b/g.test(command) || /да/i.test(command)) {
     return replies.secondQuestion();
   }
-  if (/#^[0-9]+$#/g.test(command)) {
+  if (/болит/g.test(command)) {
     return replies.thirdQuestion();
   }
+
+  if (/#^[0-9]+$#/g.test(command)) {
+    return replies.fourthQuestion();
+  }
+  if (/да/g.test(command) || /месячные/g.test(command)) {
+    return replies.fifthDotTwoQuestion();
+  } else if (/нет/i.test(command)) {
+    return replies.fifthDotOneQuestion()
+  }
+  if (/да/g.test(command) && replies.fifthDotOneQuestion()) {
+    return replies.sixDotOneQuestion();
+  }else if(/нет/g.test(command) && replies.fifthDotTwoQuestion()){
+    return replies.sixDotTwoQuestion();
+  }
+
+
 }
 
 const PORT = process.env.PORT || 3000;
